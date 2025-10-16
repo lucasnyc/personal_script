@@ -23,6 +23,9 @@ def parse(filename):
     try:
         with open(filename, 'r') as f:
             for line in f:
+                if not line.strip():
+                    continue
+
                 try:
                     # each line is a separate json object
                     json_object = json.loads(line)
@@ -41,7 +44,8 @@ def parse(filename):
                             'file_path': json_object.get('file', {}).get('path')
                         }
                         events.append(parsed_event)
-                except json.JSONDecodeError:
+                except Exception as e:
+                    print(f"Caught error {e}")
                     continue
 
     except FileNotFoundError:
