@@ -11,7 +11,7 @@ def parse(filename):
     custom_tags = {
         'exploit_start',
         'malicious_start',
-        'malicious_file_activity',
+        'malicious_file_access',
         'malicious_dir_change',
         'malicious_file_delete',
         'malicious_network',
