@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# arguyment check
+if [ $# -eq 0 ]; then
+    echo "Usage: newnote \"Title\""
+    exit 1
+fi
+
+TITLE="$*"
+DATE_PREFIX=$(date '+%Y-%m-%d')
+TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S %z')
+
+# space handling
+SLUG=$(echo "$TITLE" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
+
+FILENAME="${DATE_PREFIX}-${SLUG}.markdown"
+
+# Write the content
+cat <<EOF > "$FILENAME"
+---
+layout: post
+title:  "$TITLE"
+date:   $TIMESTAMP
+categories: 
+---
+EOF
+
+echo "Created: $FILENAME"
